@@ -1,0 +1,21 @@
+pkgname=firmware-xiaomi-sweet
+pkgver=1
+pkgrel=0
+pkgdesc="Firmware for Xiaomi Redmi Note 10 Pro"
+url="https://github.com/sm7150-mainline/firmware-xiaomi-sweet"
+arch="aarch64"
+license="proprietary"
+options="!check !strip !archcheck !tracedeps pmb:cross-native"
+_commit="576efdece91dc8f7a869509e55a6229b3d5f797b"
+source="$pkgname-$_commit.tar.gz::$url/archive/$_commit/$pkgname-$_commit.tar.gz"
+builddir="$srcdir/$pkgname-$_commit"
+
+package() {
+	mkdir -p "$pkgdir"
+
+	find . -type f -exec install -Dm644 {} "$pkgdir"/{} \;
+}
+
+sha512sums="
+3d4f2ec877c37ea910d1406acb8ae20e1b272a6d474196f4ce6310ad8ccd0cbf9284011136f08e69bb2a6047bdefda1468c8f88f2263a9aeda2bdd643bbf94e8  firmware-xiaomi-sweet-576efdece91dc8f7a869509e55a6229b3d5f797b.tar.gz
+"
