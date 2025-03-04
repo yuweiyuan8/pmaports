@@ -1,0 +1,45 @@
+pkgname=hexagonfs-firmware-loader
+pkgver=1.0.0
+pkgrel=0
+pkgdesc="Prepare the HexagonFS directory from msm-firmware-loader mounts"
+url="https://postmarketos.org/"
+subpackages="$pkgname-openrc $pkgname-systemd"
+arch="aarch64"
+license="MIT"
+options="!check"
+depends="msm-firmware-loader"
+_commit="138fb61b6cb45ab46ec90fc1520d593da1770321"
+source="https://gitlab.postmarketos.org/Adrian/hexagonfs-firmware-loader/-/archive/$_commit/hexagonfs-firmware-loader-$_commit.tar.gz"
+builddir="$srcdir/hexagonfs-firmware-loader-$_commit"
+
+package() {
+	# Create mountpoint for the HexagonFS files
+	mkdir -p "$pkgdir/usr/share/qcom"
+
+	# Install config for hexagonrpcd to point it to our mountpoint
+
+	install -Dm755 hexagonfs-firmware-loader.sh \
+		"$pkgdir/usr/sbin/hexagonfs-firmware-loader.sh"
+
+	cp -r socinfo "$pkgdir/usr/share/hexagonfs-firmware-loader"
+
+	install -Dm755 hexagonfs-firmware-loader.initd \
+		"$pkgdir/etc/init.d/hexagonfs-firmware-loader"
+
+	install -Dm644 hexagonfs-firmware-loader.service \
+		"$pkgdir/usr/lib/systemd/system/hexagonfs-firmware-loader.service"
+}
+
+openrc() {
+	install="$subpkgname.post-install"
+	default_openrc
+}
+
+systemd() {
+	install="$subpkgname.post-install $subpkgname.pre-deinstall"
+	default_systemd
+}
+
+sha512sums="
+79582ce5254d864b17229577bccc1d60ae62aee85f2e8bf56eba1e3bd603c8e0ccbe1b593e9e843aabf7921489683282d37a386d605eb1c7b21864757870f112  hexagonfs-firmware-loader-138fb61b6cb45ab46ec90fc1520d593da1770321.tar.gz
+"
