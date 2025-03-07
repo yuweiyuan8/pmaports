@@ -1,0 +1,71 @@
+# Maintainer: Jens Reidel <adrian@travitia.xyz>
+# Reference: <https://postmarketos.org/devicepkg>
+
+pkgname=device-qcom-sc7280
+pkgdesc="Generic device package for Qualcomm SC7280 devices"
+pkgver=1
+pkgrel=1
+url="https://postmarketos.org"
+license="MIT"
+arch="aarch64"
+options="!check !archcheck"
+depends="
+	bootmac
+	hexagonfs-firmware-loader
+	hexagonrpcd
+	linux-firmware-qca
+	linux-firmware-qcom
+	linux-postmarketos-qcom-sc7280
+	make-dynpart-mappings
+	msm-firmware-loader
+	msm-modem
+	msm-modem-uim-selection
+	postmarketos-base
+	qbootctl
+	swclock-offset
+	systemd-boot
+	tqftpserv
+	unl0kr-fbforcerefresh
+"
+makedepends="devicepkg-dev"
+subpackages="
+	$pkgname-openrc
+"
+
+source="
+	30-initramfs-firmware.files
+	deviceinfo
+	hexagonrpcd.confd
+"
+
+build() {
+	devicepkg_build $startdir $pkgname
+}
+
+package() {
+	devicepkg_package $startdir $pkgname
+
+	install -Dm644 "$srcdir"/30-initramfs-firmware.files -t \
+		"$pkgdir"/usr/share/mkinitfs/files
+
+	install -Dm644 "$srcdir"/hexagonrpcd.confd \
+		"$pkgdir"/usr/share/hexagonrpcd/hexagonrpcd-adsp-sensorspd.conf
+}
+
+openrc() {
+	install_if="$pkgname=$pkgver-r$pkgrel openrc"
+	install="$subpkgname.post-install"
+	depends="
+		hexagonrpcd-openrc
+		qbootctl-openrc
+		tqftpserv-openrc
+		"
+
+	mkdir -p "$subpkgdir"
+}
+
+sha512sums="
+e6c392776f9f86022e1c38147c5e2265ac06d6a6fb1b6ca1d2909772e53a6c8332c92c223b9e42a6989688cf11a009cfde1de2522ce408fbe81f4b199b3393b8  30-initramfs-firmware.files
+01efb5e89d0f180967ab0f3e9d8c5981c72b835328933cc4babc03b51a0f6ce65a230689262165588e6b64ffddc44e2b1bbd0333b47d23a16c4654d4d9d286cf  deviceinfo
+64c50d1e92cc29b3e8c0e5ee0c14603c5d3b6c9f9671038928cb3093a1276e6004452e55c5f7e3793b72bbc0a7dc48063ed29ba779ece2edea5ac743fa1ec473  hexagonrpcd.confd
+"
