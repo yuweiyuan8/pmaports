@@ -1,0 +1,64 @@
+# Maintainer: Nikroks <nikroks@mainlining.org>
+_flavor="postmarketos-qcom-sm8250-alioth"
+pkgname=linux-$_flavor
+pkgver=6.13.4
+pkgrel=0
+pkgdesc="Mainline kernel fork for SM8250"
+arch="aarch64"
+_carch="arm64"
+url="https://github.com/mainlining/linux/tree/nikroks/alioth"
+license="GPL-2.0-only"
+options="!strip !check !tracedeps
+	pmb:cross-native
+	pmb:kconfigcheck-nftables
+"
+makedepends="
+	bash
+	bison
+	findutils
+	flex
+	openssl-dev
+	perl
+	postmarketos-installkernel
+	python3
+"
+
+# Source
+_tag="alioth"
+_config="config-$_flavor.$arch"
+source="
+	$pkgname-$_tag.tar.gz::https://github.com/mainlining/linux/archive/nikroks/alioth/linux-$_tag.tar.gz
+	$_config
+"
+builddir="$srcdir/linux-$_tag"
+
+prepare() {
+	default_prepare
+	cp "$srcdir/config-$_flavor.$arch" .config
+}
+
+build() {
+	unset LDFLAGS
+	make ARCH="$_carch" CC="${CC:-gcc}" \
+		KBUILD_BUILD_VERSION="$((pkgrel + 1 ))-$_flavor"
+}
+
+package() {
+	mkdir -p "$pkgdir"/boot
+
+	make zinstall modules_install dtbs_install \
+		ARCH="$_carch" \
+		INSTALL_PATH="$pkgdir"/boot/ \
+		INSTALL_MOD_PATH="$pkgdir" \
+		INSTALL_MOD_STRIP=1 \
+		INSTALL_DTBS_PATH="$pkgdir/boot/dtbs"
+	rm -f "$pkgdir"/lib/modules/*/build "$pkgdir"/lib/modules/*/source
+
+	install -D "$builddir"/include/config/kernel.release \
+		"$pkgdir"/usr/share/kernel/$_flavor/kernel.release
+}
+
+sha512sums="
+3a4ea8432fd553e8e74ed86eb922465da3baaef7ba32f1c4855571117b5ac7194c02c69921bf5b5c555ff660d62ac960cf14cdd4c7fd0f22bf1a69abec9161d7  linux-postmarketos-qcom-sm8250-alioth-alioth.tar.gz
+390787e5613c2e820071ad0c63b8b38386ee7165496778dfec1d3672f995919fbd403cb3be77d85fa206a9457b7000900abb0463bd8e8a0e3c864c7a23e073f9  config-postmarketos-qcom-sm8250-alioth.aarch64
+"
