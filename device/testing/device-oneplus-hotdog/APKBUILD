@@ -24,10 +24,6 @@ source="
 	modules-initfs
 "
 
-subpackages="
-	$pkgname-nonfree-firmware:nonfree_firmware
-	$pkgname-mainline-firmware:mainline_firmware
-"
 
 build() {
 	devicepkg_build $startdir $pkgname
@@ -37,34 +33,7 @@ package() {
 	devicepkg_package $startdir $pkgname
 }
 
-mainline_firmware() {
-	pkgdesc="Firmware support packages for mainline kernel"
-	depends="firmware-oneplus-hotdog-adreno"
-	install_if="linux-oneplus-hotdog-x3 $pkgname-nonfree-firmware"
-	mkdir "$subpkgdir"
 
-	install -Dm644 "$srcdir/30-initramfs-firmware.files" \
-		"$subpkgdir/etc/postmarketos-mkinitfs/files/30-initramfs-firmware.files"
-}
-
-nonfree_firmware() {
-	pkgdesc="Firmware for GPU, Touschreen, Audio, Bluetooth, WiFi, etc."
-	depends="
-		firmware-oneplus-hotdog-adreno
-		firmware-oneplus-hotdog-adsp
-		firmware-oneplus-hotdog-cdsp
-		firmware-oneplus-hotdog-modem
-		firmware-oneplus-hotdog-wlan
-		firmware-oneplus-hotdog-bluetooth
-		firmware-oneplus-hotdog-venus
-		msm-modem
-		pd-mapper
-		pd-mapper-openrc
-		tqftpserv
-		tqftpserv-openrc
-		bootmac
-		alsa-utils
-		"
 	install="$subpkgname.post-install"
 	mkdir "$subpkgdir"
 }
