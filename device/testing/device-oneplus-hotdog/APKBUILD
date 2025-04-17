@@ -24,6 +24,11 @@ source="
 	modules-initfs
 "
 
+subpackages="
+	$pkgname-nonfree-firmware:nonfree_firmware
+	$pkgname-mainline-firmware:mainline_firmware
+"
+
 build() {
 	devicepkg_build $startdir $pkgname
 }
@@ -32,7 +37,17 @@ package() {
 	devicepkg_package $startdir $pkgname
 }
 
-
+nonfree_firmware() {
+	pkgdesc="Firmware for GPU, Touschreen, Audio, Bluetooth, WiFi, etc."
+	depends="
+		msm-modem
+		pd-mapper
+		pd-mapper-openrc
+		tqftpserv
+		tqftpserv-openrc
+		bootmac
+		alsa-utils
+		"
 	install="$subpkgname.post-install"
 	mkdir "$subpkgdir"
 }
