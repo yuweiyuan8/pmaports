@@ -24,10 +24,6 @@ source="
 	modules-initfs
 "
 
-subpackages="
-	$pkgname-nonfree-firmware:nonfree_firmware
-	$pkgname-mainline-firmware:mainline_firmware
-"
 
 build() {
 	devicepkg_build $startdir $pkgname
