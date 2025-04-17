@@ -12,7 +12,7 @@ options="!check !archcheck"
 depends="
 	postmarketos-base
 	mkbootimg
-	linux-postmarketos-sm8150
+	linux-postmarketos-qcom-sm8150
 	mesa-vulkan-freedreno
 	swclock-offset
 "
