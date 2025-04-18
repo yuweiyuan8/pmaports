@@ -33,7 +33,7 @@ _commit="defb39db31e6e2de8d7319c77ad697f9581070bd"
 
 # Source
 source="
-	$_repo-$_tag.tar.bz2::https://github.com/yuweiyuan8/sm8150-mainline-linux/-/archive/$_commit/linux-$_commit.tar.bz2
+	$_repo-$_tag.tar.gz::https://github.com/yuweiyuan8/sm8150-mainline-linux/archive/refs/tags/v6.14.0-sm8150.tar.gz
 	$_config
 "
 builddir="$srcdir/$_repo-$_commit"
