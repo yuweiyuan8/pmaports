@@ -29,7 +29,7 @@ makedepends="
 
 _repo="linux"
 _config="config-$_flavor.$arch"
-_commit="ea57f48ae26c220ee8ffafee3da9ed7bfcaaa322"
+_commit="defb39db31e6e2de8d7319c77ad697f9581070bd"
 
 # Source
 source="
