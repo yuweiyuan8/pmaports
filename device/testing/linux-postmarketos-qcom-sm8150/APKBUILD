@@ -29,7 +29,7 @@ makedepends="
 
 _repo="linux"
 _config="config-$_flavor.$arch"
-_commit="defb39db31e6e2de8d7319c77ad697f9581070bd"
+_commit="ea57f48ae26c220ee8ffafee3da9ed7bfcaaa322"
 
 # Source
 source="
@@ -65,6 +65,6 @@ package() {
 }
 
 sha512sums="
-96cb7c4be5e7099b06326157aaefadcebfd33b462825d0209ee0ef302703dfdf8003a46c97420537a75bfe1f3faa01f66d029b70c2ec3b873e0822eacee11c15  linux-postmarketos-qcom-sm8150-defb39db31e6e2de8d7319c77ad697f9581070bd.tar.gz
+96cb7c4be5e7099b06326157aaefadcebfd33b462825d0209ee0ef302703dfdf8003a46c97420537a75bfe1f3faa01f66d029b70c2ec3b873e0822eacee11c15  linux-postmarketos-qcom-sm8150-ea57f48ae26c220ee8ffafee3da9ed7bfcaaa322
 9670438faecb82be59defad995444830cd0a07831e5da51d5bbed53978d7a481605d12fb1d5871a628dea45e349fd2d6ac3543330cc52647d4c6d28b1f04ffae  config-postmarketos-qcom-sm8150.aarch64
 "
