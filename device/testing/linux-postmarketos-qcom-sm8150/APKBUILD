@@ -11,7 +11,7 @@ pkgrel=1
 pkgdesc="Mainline Kernel fork for SM8150 devices"
 arch="aarch64"
 _carch="arm64"
-url="https://gitlab.com/sm8150-mainline/linux"
+url="https://github.com/yuweiyuan8/sm8150-mainline-linux.git"
 license="GPL-2.0-only"
 options="!strip !check !tracedeps
 	pmb:cross-native
@@ -29,11 +29,11 @@ makedepends="
 
 _repo="linux"
 _config="config-$_flavor.$arch"
-_commit="93f303701cafa17135d8ee563ffdc39f319783f1"
+_commit="ea57f48ae26c220ee8ffafee3da9ed7bfcaaa322"
 
 # Source
 source="
-	$_repo-$_tag.tar.bz2::https://gitlab.com/sm8150-mainline/linux/-/archive/$_commit/linux-$_commit.tar.bz2
+	$_repo-$_tag.tar.bz2::https://github.com/yuweiyuan8/sm8150-mainline-linux/-/archive/$_commit/linux-$_commit.tar.bz2
 	$_config
 "
 builddir="$srcdir/$_repo-$_commit"
