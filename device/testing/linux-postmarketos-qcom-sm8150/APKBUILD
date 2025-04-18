@@ -33,10 +33,11 @@ _commit="defb39db31e6e2de8d7319c77ad697f9581070bd"
 
 # Source
 source="
-	$_repo-$_tag.tar.gz::https://github.com/yuweiyuan8/sm8150-mainline-linux/archive/refs/tags/v6.14.0-sm8150.tar.gz
+	$pkgname-$_commit.tar.gz::https://github.com/yuweiyuan8/sm8150-mainline-linux/$_repository/archive/$_commit.tar.gz
 	$_config
 "
-builddir="$srcdir/$_repo-$_commit"
+builddir="$srcdir/$_repository-$_commit"
+_outdir="out"
 
 prepare() {
 	default_prepare
@@ -64,6 +65,6 @@ package() {
 }
 
 sha512sums="
-15cebff12c33c4cbe371da840a508554c59a0f84d5256bb2306fdfb754064a2719684fbc46233d5aeeb321fa27f7a4babba0454cc60c9aa96cf10d051c792036  sm8150-mainline-linux-6.14.0-sm8150.tar.gz
+15cebff12c33c4cbe371da840a508554c59a0f84d5256bb2306fdfb754064a2719684fbc46233d5aeeb321fa27f7a4babba0454cc60c9aa96cf10d051c792036  linux-postmarketos-qcom-sm8150-defb39db31e6e2de8d7319c77ad697f9581070bd.tar.gz
 9670438faecb82be59defad995444830cd0a07831e5da51d5bbed53978d7a481605d12fb1d5871a628dea45e349fd2d6ac3543330cc52647d4c6d28b1f04ffae  config-postmarketos-qcom-sm8150.aarch64
 "
