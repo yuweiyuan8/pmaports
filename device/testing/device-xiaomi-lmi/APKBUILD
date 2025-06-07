@@ -42,7 +42,7 @@ package() {
 	devicepkg_package $startdir $pkgname
 
 	# device-specific alsa ucm conf
-	install -Dm644 "$srcdir/alioth.conf" \
+	install -Dm644 "$srcdir/lmi.conf" \
 		"$pkgdir/usr/share/alsa/ucm2/Xiaomi/lmi/lmi.conf"
 
 	install -Dm644 "$srcdir/HiFi.conf" \
@@ -56,7 +56,7 @@ package() {
 nonfree_firmware() {
 	pkgdesc="GPU, venus, modem and sensor firmware"
 	depends="
-		firmware-xiaomi-alioth
+		firmware-xiaomi-lmi
 		firmware-qcom-adreno-a650
 		linux-firmware-qcom
 		linux-firmware-qca
