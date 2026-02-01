@@ -1,12 +1,12 @@
 # Maintainer: Nikroks <nikroks@mainlining.org>
 _flavor="postmarketos-qcom-sm8250-lmi"
 pkgname=linux-$_flavor
-pkgver=6.13.4
+pkgver=6.19.7
 pkgrel=0
 pkgdesc="Mainline kernel fork for SM8250"
 arch="aarch64"
 _carch="arm64"
-url="https://github.com/yuweiyuan8/linux/tree/nikroks/alioth"
+url="https://github.com/yuweiyuan8/linux/tree/v6.19"
 license="GPL-2.0-only"
 options="!strip !check !tracedeps
 	pmb:cross-native
@@ -27,10 +27,10 @@ makedepends="
 _tag="lmi"
 _config="config-$_flavor.$arch"
 source="
-	$pkgname-$_tag.tar.gz::https://github.com/yuweiyuan8/linux/archive/nikroks/alioth/linux-$_tag.tar.gz
+	$pkgname-$_tag.tar.gz::https://github.com/yuweiyuan8/linux/archive/v6.19/linux-$_tag.tar.gz
 	$_config
 "
-builddir="$srcdir/linux-nikroks-alioth"
+builddir="$srcdir/linux-v6.19"
 
 prepare() {
 	default_prepare
